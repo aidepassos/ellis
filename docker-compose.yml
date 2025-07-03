@@ -1,0 +1,17 @@
+
+services:
+  # Serviço da aplicação Python/FastAPI
+  app:
+    build: . # Constrói a imagem a partir do Dockerfile na raiz do projeto
+    container_name: ellis-app
+    # O comando já está no Dockerfile, mas pode ser especificado aqui para clareza.
+    # command: uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      # Monta o código local no contêiner para hot-reloading com Uvicorn
+      - .:/app
+    ports:
+      - "8000:8000"
+    # O arquivo .env ainda pode ser útil para outras variáveis de ambiente.
+    # Se não for o caso, esta linha pode ser removida.
+    env_file:
+      - .env
